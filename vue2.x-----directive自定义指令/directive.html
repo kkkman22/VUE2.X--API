@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>directive</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>我对全局api的理解:</p>
+        <h3>在构造器外部用Vue提供给我们的API函数来定义新的功能</h3>
+        <div v-xiaowangye="color" id="demo">
+            {{num}}
+        </div>
+        <div>
+            <button @click="add">Add</button>
+        </div>
+        <div>
+                <button onclick="unbind()">解绑</button>
+            </div>
+    </div>
+    <script>
+        // 简写方式:
+        // el: 指令所绑定的元素， 可以用来直接操作DOM。
+        // binding: 一个对象， 包含指令的很多信息。
+        // vnode: Vue编译生成的虚拟节点。
+        // Vue.directive('xiaowangye', function (el, bingding, vnode) {
+        //     console.log(el) //  div#demo
+        //     console.log(bingding)
+        //     console.log(vnode)
+        //     el.style = 'color:' + bingding.value
+        // })
+
+        // 自定义指令的生命周期:
+        Vue.directive('xiaowangye', {
+            bind: function () { //被绑定
+                console.log('1 - bind');
+            },
+            inserted: function () { //绑定到节点
+                console.log('2 - inserted');
+            },
+            update: function () { //组件更新
+                console.log('3 - update');
+            },
+            componentUpdated: function () { //组件更新完成
+                console.log('4 - componentUpdated');
+            },
+            unbind: function () { //解绑
+                console.log('1 - unbind');
+            }
+        });
+        function unbind() {
+            app.$destroy()
+        };
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 666,
+                color: 'green'
+            },
+            methods: {
+                add: function () {
+                    this.num++;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
