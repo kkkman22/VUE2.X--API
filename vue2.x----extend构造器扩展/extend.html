@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue.extend-实例构造器扩展</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div >
+        <p>我对Vue.extend的理解:</p>
+        <h3>Vue.extend 返回的是一个“扩展实例构造器”,经常用于Vue.component用来生成组件，
+            当在模板中遇到该组件名称作为标签的自定义元素时，会自动调用“扩展实例构造器”来生产组件实例，并挂载到自定义元素上。</h3>
+            <br>
+            <br>
+            <author></author>
+    </div>
+    <script>
+       
+       var linkExtend = Vue.extend({
+        template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",
+        data:function(){
+            return{
+                authorName:'小王爷',
+                authorUrl:'https://github.com/kkkman22/VUE2.X--API'
+            }
+        }
+    });
+    new linkExtend().$mount('author');
+    </script>
+</body>
+
+</html>
