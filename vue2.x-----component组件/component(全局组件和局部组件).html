@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对component的理解:</p>
+        <h3>组件就是制作自定义的标签,这些标签在HTML中是没有的</h3>
+        <br>
+        <br>
+        <div id="app">
+            <xiaowangye></xiaowangye>
+            <kkk></kkk>
+            <template id="demo">
+                <div>这是局部注册组件</div>
+            </template>
+        </div>
+    </div>
+    <script type="text/javascript">
+        Vue.component('xiaowangye', {
+            template: `<div>这是全局注册组件</div>`
+        });
+
+        var app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                kkk: "#demo"
+            }
+        })
+    </script>
+</body>
+
+</html>

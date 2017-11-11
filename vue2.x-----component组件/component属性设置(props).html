@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对props选项的理解:</p>
+        <h3>就是设置和获取标签上的属性值的</h3>
+        <div>
+            <h2>父子组件的关系可以总结为 prop 向下传递，事件向上传递。父组件给子组件标签设置属性值,子组件通过事件给父组件发送信息</h2>
+            <img src="./props-events.png" alt="">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="app">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+        <child :msg="message"></child>
+    </div>
+    <template id="child">
+        <p>从父组件传来的msg: {{ msg }} --------改变父组件传过来msg:{{ song }}</p>
+    </template>
+    <script>
+        Vue.component('child', {
+            template: '#child',
+            props: ['msg'],
+            // 实现更改父组件传过来的值的方法一:
+            // data:function() {
+            //     return {song: (this.msg+123)}  // 这样数据不能同步更新
+            // },
+           //   实现更改父组件传过来的值的方法二:
+            computed: {
+                song:function() {
+                    return this.msg+"123"; // 这样数据能同步更新
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'hello props'
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
