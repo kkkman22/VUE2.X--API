@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>template四种写法</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    这三种写法 都会把 app 挂载的元素替换掉,解决方法是用<slot></slot>
+    第四种方法是.vue写法 ,详细见vue-cli
+    <div id="app">
+        <div>
+            {{message}}
+        </div>     
+    </div>
+   <template id="two">
+             <h2 style="color:red">第二种写法:template标签模板</h2>
+    </template>
+    <script type="x-template" class="third">
+            <h2 style="color:red">第三种写法:script标签模板(注意type="x-template")</h2>
+        </script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: '33'
+            },
+            // template: `<h1 style="color:red">第一种写法:我是选项模板</h1>`  //  f12看DOM结构 模板将会 替换 挂载的元素（id=app）
+            // template:"#two"
+            template:'.third'
+        })
+    </script>
+</body>
+
+</html>
