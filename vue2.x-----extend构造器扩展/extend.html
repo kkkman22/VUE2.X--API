@@ -17,6 +17,7 @@
             <br>
             <br>
             <author></author>
+            <div id="author"></div>
     </div>
     <script>
        
@@ -29,7 +30,8 @@
             }
         }
     });
-    new linkExtend().$mount('author');
+    new linkExtend().$mount('author'); // 似挂载组件
+    new linkExtend().$mount('#author');
     </script>
 </body>
 

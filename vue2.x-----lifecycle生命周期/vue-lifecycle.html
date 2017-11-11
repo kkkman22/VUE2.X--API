@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生命周期(钩子函数)</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>我对生命周期((钩子函数))的理解:</p>
+        <h3>钩子函数就是在vue的每个阶段进行操作数据或者改变内容的东东。</h3>
+        <img src="./vue-lifecycle.png" alt="">
+        <br>
+        <br>
+        <div >
+            {{message}}
+            <p>
+                <button @click="jia">+++</button>
+            </p>
+        </div>
+        <button onclick="app.$destroy()">销毁</button>
+    </div>
+    <script type="text/javascript">
+        var app =  new Vue({
+            el: "#app",
+            data: {
+                message: 33
+            },
+            methods: {
+                jia: function () {
+                    this.message++;
+                }
+            },
+            beforeCreate: () => {
+                console.log('1-beforeCreate 初始化之后');
+            },
+            created: () => {
+                console.log('2-created 创建完成');
+            },
+            beforeMount: () => {
+                console.log('3-beforeMount 挂载之前');
+            },
+            mounted: () => {
+                console.log('4-mounted 被创建');
+            },
+            beforeUpdate: () => {
+                console.log('5-beforeUpdate 数据更新前');
+            },
+            updated: function () {
+                console.log('6-updated 被更新后');
+            },
+            activated: () => {
+                console.log('7-activated'); //keep-alive 组件激活时调用。
+            },
+            deactivated: () => {
+                console.log('8-deactivated'); //keep-alive 组件停用时调用。。
+            },
+            beforeDestroy: () => {
+                console.log('9-beforeDestroy 销毁之前');
+            },
+            destroyed: () => {
+                console.log('10-destroyed 销毁之后')
+            }
+
+        })
+    </script>
+</body>
+
+</html>

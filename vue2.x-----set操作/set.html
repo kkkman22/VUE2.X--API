@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue.set操作构造器</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对Vue.set的理解:</p>
+        <h3>Vue.set 就是在构造器外部操作构造器内部的数据、属性或者方法。</h3>
+        <br>
+        <br>
+        <div id="app">
+            <ul>
+                <li v-for=" abc in arr">{{abc}}</li>
+            </ul>
+
+        </div>
+        <button onclick="add()">外部添加</button>
+
+        <script type="text/javascript">
+            function add() {
+                alert("我已经执行了");
+                //app.arr[2] = 'ddd'; // 不能执行
+                // 由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+                // *当你利用索引直接设置一个项时，vue不会为我们自动更新。
+                // *当你修改数组的长度时，vue不会为我们自动更新。
+
+                 // vue.set 存在的意义.
+                 Vue.set(app.arr,3,'ddd');
+                 Vue.set(app.arr,2,'我看行')
+            }
+            var outData = {
+                arr: ['aaa', 'bbb', 'ccc']
+            };
+            var app = new Vue({
+                el: '#app',
+                data: outData
+            })
+        </script>
+</body>
+
+</html>
