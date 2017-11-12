@@ -13,10 +13,13 @@
     <div>
         <p>我对子组件怎么跟父组件通信的理解:</p>
         <h3>使用 $on(eventName) 监听事件 使用 $emit(eventName) 触发事件</h3>
+        <p>给组件绑定原生事件的方法:.native</p>        
     </div>
     <br>
     <br>
     <div id="app">
+        <!-- 给组件绑定原生事件.native -->
+        <button @click.native="showMsg" class="but" ref="btn2">1</button>
         <p>{{ message }}</p>
         <child @add="addCounter"></child>
         <child @add="addCounter"></child>
@@ -26,7 +29,7 @@
     </template>
     <script>
         Vue.component('child', {
-            template:'#child',
+            template: '#child',
             data: function () {
                 return {
                     counter: 0
@@ -41,17 +44,29 @@
 
         })
         new Vue({
-            el: '#app',
-            data: {
-                message: 0
-            },
-            methods: {
-                addCounter: function () {
-                    this.message += 1
-                }
-
-            }
-        })
+                    el: '#app',
+                    data: {
+                        message: 0
+                    },
+                    methods: {
+                        addCounter: function () {
+                            this.message += 1
+                        },
+                        showMsg: function () {
+                            // var btn = document.getElementsByClassName('but');
+                            // console.log(btn)
+                            // btn[0].onclick = function () {
+                            //   console.log(1);
+                            // };
+                            (this.$refs.btn2).onclick = function () { //this.$refs.btn2  减少获取dom节点的消耗
+                                alert(2);
+                            }
+                        }
+                        },
+                        mounted() {
+                            this.showMsg()
+                        }
+                    })
     </script>
     <style>
         .red {
