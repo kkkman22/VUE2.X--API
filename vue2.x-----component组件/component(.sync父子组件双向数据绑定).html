@@ -18,8 +18,8 @@
     <br>
     <div id="app">
         <div>父组件</div>
-            <input type="text" v-model="pname" :xm="pname"  >
-            <input type="text" v-model="xiname"  :ka="xiname">
+            <input type="text" v-model="pname"  >
+            <input type="text" v-model="xiname" >
             <div>子组件</div>
         <child :xm.sync="pname" :ka.sync="xiname"></child>
     </div>
@@ -28,16 +28,15 @@
             <input v-model="name" placeholder="姓名">
             <input v-model="idCard" placeholder="请输入身份证号" required>
         </div>
-
     </template>
     <script>
         Vue.component('child', {
             template: '#child',
-            props: ["xm", "ka"],
+            props: ["xm", "ka"],// props 可以使数组或对象
             data: function () {
                 return {
-                    name: this.xm,
-                    idCard: this.ka
+                    name: "",
+                    idCard: ""
                 }
             },
             watch: {
