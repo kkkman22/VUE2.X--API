@@ -25,8 +25,8 @@
     <br>
     <div id="app">
         <p>{{ message }}</p>
-        <input type="text" v-model="message">
-        <child :msg="message"></child>
+        <input type="text" v-model="message">  
+        <child :msg="message" class="red" style="color:red"></child> <!--class，style就是非prop属性，无需定义相应的prop，这些属性都会被添加到组件的根元素上。 -->
     </div>
     <template id="child">
         <p>从父组件传来的msg: {{ msg }} --------改变父组件传过来msg:{{ song }}</p>
@@ -50,6 +50,9 @@
                 song: function () {
                     return this.msg + "123"; // 这样数据能同步更新
                 }
+            },
+            mounted:function () { // 获取非props属性的值
+                console.log(this.$el.getAttribute('style'))
             }
         })
         new Vue({
@@ -59,7 +62,11 @@
             }
         })
     </script>
-
+<style>
+    .red{
+        font-size: 20px
+    }
+</style>
 
 </body>
 
