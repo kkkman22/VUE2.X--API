@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对$vm实例的理解:</p>
+        <h3>实例就是在构造器外部操作构造器内部的属性选项或者方法. 实例的作用就是给原生的或者其他javascript框架一个接口，让Vue和其他框架一起使用。
+        </h3>
+        <br>
+        <br>
+        <div id="app">
+            <ul>
+                <li v-for=" abc in arr">{{abc}}</li>
+            </ul>
+
+        </div>
+    </div>
+    <button onclick="add()">外部添加</button>
+
+    <script type="text/javascript">
+        function add() {
+            alert("我已经执行了");
+            //app.arr[2] = 'ddd'; // 不能执行
+            // 由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+            // *当你利用索引直接设置一个项时，vue不会为我们自动更新。
+            // *当你修改数组的长度时，vue不会为我们自动更新。
+
+            // vue.set 存在的意义.
+            Vue.set(app.arr, 3, 'ddd');
+            Vue.set(app.arr, 2, '我看行')
+        };
+        var outData = {
+            arr: ['aaa', 'bbb', 'ccc']
+        };
+        var app = new Vue({
+            el: '#app',
+            data: outData,
+        })
+        console.log(app) // 打印vue实例  
+            
+    </script>
+</body>
+
+</html>

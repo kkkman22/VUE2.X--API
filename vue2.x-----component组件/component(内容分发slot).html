@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对slot的理解:</p>
+        <h3>slot就是在自定义组件时传递给组件内容，组件接收内容并输出,slot相当于在目标组件占位</h3>
+        <br>
+        <br>
+        <div id="app">
+              <!-- 1、在HTML的组件中用slot属性传递值。 -->
+            <xiaowangye>
+                <span slot="bolgUrl">{{xiaowangyeData.bolgUrl}}</span>
+                <span slot="netName">{{xiaowangyeData.netName}}</span>
+                <span slot="skill">{{xiaowangyeData.skill}}</span>
+                <span slot="email">{{xiaowangyeData.email}}</span>
+             <div>  我是没人要的 你行行好 找个位置给俺</div> 
+            </xiaowangye>
+        </div>
+
+      <!-- 2.在组件模板中用<slot></slot>标签接收值。 -->
+        <template id="tmp">
+            <div>
+               <slot></slot> <!--   //  默认插槽位置  专门接受没人要的孩子-->
+                <p>博客地址：
+                    <slot name="bolgUrl"></slot>
+                </p>
+                <p>网名：
+                    <slot name="netName"></slot>
+                </p>
+                <p>技术类型：
+                    <slot name="skill"></slot>
+                </p>
+                <p>邮箱:
+                    <slot name="email"></slot>
+                </p>
+
+            </div>
+        </template>
+
+        <script type="text/javascript">
+            var xiaowangye = {
+                template: '#tmp'
+            }
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    xiaowangyeData: {
+                        bolgUrl: 'https://github.com/kkkman22/VUE2.X--API',
+                        netName: 'kkkman22',
+                        skill: 'FE',
+                        email:' xiaowangye.conming@gmail.com'
+                    }
+                },
+                components: {
+                    "xiaowangye": xiaowangye
+                }
+            })
+        </script>
+</body>
+
+</html>
