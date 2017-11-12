@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对子组件怎么跟父组件通信的理解:</p>
+        <h3>使用 $on(eventName) 监听事件 使用 $emit(eventName) 触发事件</h3>
+    </div>
+    <br>
+    <br>
+    <div id="app">
+        <p>{{ message }}</p>
+        <child @add="addCounter"></child>
+        <child @add="addCounter"></child>
+    </div>
+    <template id="child">
+        <button @click="incrementCounter">{{ counter }}</button>
+    </template>
+    <script>
+        Vue.component('child', {
+            template:'#child',
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrementCounter: function () {
+                    this.counter += 1
+                    this.$emit('add')
+                }
+            }
+
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                message: 0
+            },
+            methods: {
+                addCounter: function () {
+                    this.message += 1
+                }
+
+            }
+        })
+    </script>
+    <style>
+        .red {
+            font-size: 20px
+        }
+    </style>
+
+</body>
+
+</html>
