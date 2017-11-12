@@ -18,7 +18,7 @@
     <br>
     <br>
     <div id="app">
-        <!-- 给组件绑定原生事件.native -->
+        <!-- 给组件绑定原生事件.native 在实际开发中经常需要把某个按钮封装成组件，然后反复使用，如何让组件调用构造器里的方法，而不是组件里的方法。就需要用到我们的.native修饰器了。-->
         <button @click.native="showMsg()" class="but" ref="btn2">1</button>
         <!--$event参数都是关于你点击鼠标的一些事件和属性  -->
         <button @click="showMsg($event)" class="but" ref="btn2">1</button> 
