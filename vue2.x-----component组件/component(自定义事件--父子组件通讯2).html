@@ -23,6 +23,7 @@
         <p>{{ message }}</p>
         <child @add="addCounter"></child>
         <child @add="addCounter"></child>
+        <child @add.sync="addCounter"></child>
     </div>
     <template id="child">
         <button @click="incrementCounter">{{ counter }}</button>

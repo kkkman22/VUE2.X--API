@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="UA-Compatible" content="ie=edge">
+    <title>component组件</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>我对.sync选项的理解:</p>
+        <h3> 子组件监听prop值的改变,然后触发父组件监听的事件</h3>
+    </div>
+    <br>
+    <br>
+    <div id="app">
+        <div>父组件</div>
+            <input type="text" v-model="pname" :xm="pname"  >
+            <input type="text" v-model="xiname"  :ka="xiname">
+            <div>子组件</div>
+        <child :xm.sync="pname" :ka.sync="xiname"></child>
+    </div>
+    <template id="child">
+        <div>
+            <input v-model="name" placeholder="姓名">
+            <input v-model="idCard" placeholder="请输入身份证号" required>
+        </div>
+
+    </template>
+    <script>
+        Vue.component('child', {
+            template: '#child',
+            props: ["xm", "ka"],
+            data: function () {
+                return {
+                    name: this.xm,
+                    idCard: this.ka
+                }
+            },
+            watch: {
+                xm(val) {
+                    this.name = val;
+                },
+                name(val) {
+                    //设置监听，如果改变就更新xm
+                    this.$emit('update:xm', val)
+                },
+                ka(val) {
+                    this.idCard = val
+                },
+                idCard(val) {
+                    this.$emit('update:ka', val)
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    pname: "",
+                    xiname: ""
+                }
+            },
+           
+        })
+    </script>
+    <style>
+        .red {
+            font-size: 20px
+        }
+    </style>
+
+</body>
+
+</html>
