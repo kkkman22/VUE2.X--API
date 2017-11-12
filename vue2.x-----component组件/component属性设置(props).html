@@ -17,6 +17,9 @@
             <h2>父子组件的关系可以总结为 prop 向下传递，事件向上传递。父组件给子组件标签设置属性值,子组件通过事件给父组件发送信息</h2>
             <img src="./props-events.png" alt="">
         </div>
+        <div>在两种情况下，我们很容易忍不住想去修改 prop 中数据：</div>
+        <div>Prop 作为初始值传入后，子组件想把它当作局部数据来用；</div>
+        <div>Prop 作为原始数据传入，由子组件处理成其它数据输出。</div>
     </div>
     <br>
     <br>
@@ -31,15 +34,27 @@
     <script>
         Vue.component('child', {
             template: '#child',
-            props: ['msg'],
+            props: {
+                msg: { // prop验证规则  这个验证主要是用于开发时,让开发者判断父组件传递的数据类型,就算没通过验证,一样会渲染出来,在正式的生产环境下 也不会报警
+                    type: String,
+                    required: true,
+                    // validator: function(val){
+                    //     if(val==="1"){
+                    //         alert("这是我需要的数据")
+                    //     }else{
+                    //         alert("这不是我需要的数据")
+                    //     }
+                    // }
+                    }
+            },
             // 实现更改父组件传过来的值的方法一:
             // data:function() {
             //     return {song: (this.msg+123)}  // 这样数据不能同步更新
             // },
-           //   实现更改父组件传过来的值的方法二:
+            //   实现更改父组件传过来的值的方法二:
             computed: {
-                song:function() {
-                    return this.msg+"123"; // 这样数据能同步更新
+                song: function () {
+                    return this.song + "123"; // 这样数据能同步更新
                 }
             }
         })
